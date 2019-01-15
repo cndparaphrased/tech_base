@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>jQuery To Do List App</title>
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    ul li {
+      cursor: move;
+    }
+  </style>
+</head>
+<body>
+
+<div class="jumbotron">
+  <div class="container">
+    <div class="page-header"> <h1>jQuery To Do List App</h1></div>
+    <form>
+      <input class="form-control input-lg" type="text" placeholder="Add an item...">
+    </form>
+    <ul>
+      <!-- To do items get added dynamically here -->
+    </ul>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script>
+
+  // doc ready - only one per page!
+  $(function(){
+
+  // listen for a form submission 
+
+  $('form').on('submit', function(event) {
+
+    // prevent the default behaviour of the form
+    event.preventDefault();
+
+    // figure out what the user wrote in the input
+    // use the trim method to remove extra white space
+    let text = $('input').val().trim(); //text = text.trim();
+    
+    if(text.length > 0){
+
+      // turn it into a list item
+      const toDo = `<li><span class="fa fa-square-o"></span>${text}</li>`;
+
+      // put it in the ul on the page
+      $('ul').append(toDo);
+    } 
+
+    $('input').val('');
+  });
+
+  // add an event listener that listens to a click on the list items so we can mark them complete
+  $('ul').on('click', 'li', function() {
+    //add a class to the list item (text-muted)
+    // console.log(this);
+    $(this).toggleClass('text-muted');
+
+    // add the class to the span (fa-check-square-o)
+    $(this).find('span').toggleClass('fa fa-square-o fa-check-square-o');
+  });
+
+
+  });
+
+
+
+</script>
+</body>
+</html>
